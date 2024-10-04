@@ -27,27 +27,39 @@ export default function BottomNavBar() {
                 New Habit
               </Button>
             </DrawerTrigger>
-            <DrawerContent>
+            <DrawerContent className="h-fit">
               <DrawerHeader className="text-left">
                 <DrawerTitle className="text-xl font-bold">
                   Create a New Habit
                 </DrawerTitle>
               </DrawerHeader>
-              <div className="flex flex-col gap-y-8 p-5 w-full h-full">
+              <div className="p-4 space-y-10">
                 <div className="space-y-2">
                   <Label htmlFor="task">Task</Label>
-                  <Input id="task" placeholder="Enter your task" />
+                  <Input
+                    id="task"
+                    placeholder="Enter your task"
+                    className="rounded-full p-4"
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="goal">Goal</Label>
-                  <Input id="goal" placeholder="Enter your " />
+                  <Input
+                    id="goal"
+                    placeholder="Enter your goal"
+                    className="rounded-full p-4"
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="dailyGoal">Daily Goal</Label>
-                  <Input id="dailyGoal" placeholder="Enter your daily goal" />
+                  <Input
+                    id="dailyGoal"
+                    placeholder="Enter your daily goal"
+                    className="rounded-full p-4"
+                  />
                 </div>
               </div>
-              <DrawerFooter className="mt-0">
+              <DrawerFooter className="h-14">
                 <Button className="w-full rounded-full h-full">
                   Create Habit
                 </Button>
