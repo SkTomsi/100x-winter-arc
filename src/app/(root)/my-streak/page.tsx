@@ -9,9 +9,8 @@ import {
   RadialBarChart,
 } from "recharts";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-export const description = "A radial chart with text";
 
-export default function MyStreakPage() {
+export default function MyStreak() {
   const chartData = [
     {
       browser: "safari",
