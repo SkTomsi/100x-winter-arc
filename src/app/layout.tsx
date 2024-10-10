@@ -4,14 +4,20 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "../assets/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "../assets/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+
+const customFont = localFont({
+  src: "../assets/fonts/ranking.otf",
+  variable: "--font-custom",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -27,10 +33,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased tracking-tighter max-w-[568px] mx-auto min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${customFont.variable} antialiased tracking-tighter`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
-          {children}
+          <div className="max-w-[576px] mx-auto min-h-screen w-full">
+            <main className="w-full">{children}</main>
+          </div>
         </ThemeProvider>
       </body>
     </html>

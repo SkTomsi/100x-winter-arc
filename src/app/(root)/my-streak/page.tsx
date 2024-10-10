@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Label,
   PolarGrid,
@@ -9,8 +9,11 @@ import {
   RadialBarChart,
 } from "recharts";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
+import { Habit } from "@/lib/types";
+import { Card } from "@/components/ui/card";
 
 export default function MyStreak() {
+  const [habits, setHabits] = useState<Habit[]>([]);
   const chartData = [
     {
       browser: "safari",
@@ -27,8 +30,16 @@ export default function MyStreak() {
       color: "hsl(var(--primary-foreground))",
     },
   } satisfies ChartConfig;
+
+  useEffect(() => {
+    const habits = localStorage.getItem("habits");
+    if (habits) {
+      setHabits(JSON.parse(habits));
+    }
+  }, []);
+
   return (
-    <div className="w-full h-auto flex flex-col mt-8 items-center justify-start">
+    <div className="w-full h-auto flex flex-col mt-8 items-center justify-start px-4">
       <div className="w-full h-fit flex bg-primary px-7 rounded-[30px] justify-between items-center">
         <div className="text-primary-foreground">
           <p className="text-lg font-bold tracking-tight">
@@ -83,6 +94,19 @@ export default function MyStreak() {
             </PolarRadiusAxis>
           </RadialBarChart>
         </ChartContainer>
+      </div>
+      <div className="w-full h-full flex flex-col gap-y-5 my-4">
+        {habits.map((habit, index) => (
+          <Card
+            key={index}
+            className="w-full rounded-2xl border-card-foreground/10 shadow-none px-4 py-2 min-h-[88px]"
+          >
+            <div></div>
+            <p className="text-lg font-bold">{habit.task}</p>
+            <p>{habit.goal}</p>
+            <p>{habit.dailyGoal}</p>
+          </Card>
+        ))}
       </div>
     </div>
   );
