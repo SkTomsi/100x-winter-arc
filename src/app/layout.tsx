@@ -37,7 +37,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
           <div className="max-w-[576px] mx-auto min-h-screen w-full">
-            <main className="w-full">{children}</main>
+            <main className="w-full h-full">{children}</main>
           </div>
         </ThemeProvider>
       </body>

@@ -40,7 +40,7 @@ export default function BottomNavBar() {
   console.log(habits);
 
   return (
-    <div className="max-w-[576px] mx-auto w-full fixed bottom-0 py-4 h-20 md:px-40 px-10">
+    <div className="max-w-[576px] mx-auto w-full fixed bottom-0 py-4 h-[13vh] md:px-40 px-10">
       <div className="bg-[hsl(0,0%,14%)] rounded-full h-full">
         <div className="flex w-full h-full items-center justify-between p-2 gap-2">
           <Drawer>
