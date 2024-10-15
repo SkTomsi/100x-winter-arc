@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { QueryProvider } from "@/components/providers/query-provider";
 
 const geistSans = localFont({
   src: "../assets/fonts/GeistVF.woff",
@@ -35,11 +36,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${customFont.variable} antialiased tracking-tighter`}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          <div className="max-w-[576px] mx-auto min-h-screen w-full">
-            <main className="w-full h-full">{children}</main>
-          </div>
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark">
+            <div className="max-w-[576px] mx-auto min-h-screen w-full">
+              <main className="w-full h-full">{children}</main>
+            </div>
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
