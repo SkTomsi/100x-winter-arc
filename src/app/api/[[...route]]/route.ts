@@ -7,7 +7,8 @@ const app = new Hono().basePath("/api");
 
 app.use("*", clerkMiddleware());
 
-export const routes = app.route("/habits", HabitsRouter);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const routes = app.route("/habits", HabitsRouter);
 
 app.get("/", (c) => {
   const auth = getAuth(c);
