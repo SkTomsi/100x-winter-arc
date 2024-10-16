@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${customFont.variable} antialiased tracking-tighter`}
+        className={`${geistSans.variable} ${geistMono.variable} ${customFont.variable} antialiased `}
       >
         <QueryProvider>
           <ThemeProvider attribute="class" defaultTheme="dark">
@@ -44,7 +44,7 @@ export default function RootLayout({
               <div className="max-w-[576px] mx-auto min-h-screen w-full">
                 <main className="w-full h-full">{children}</main>
               </div>
-              <Toaster richColors />
+              <Toaster richColors position="top-center" />
             </ClerkProvider>
           </ThemeProvider>
         </QueryProvider>

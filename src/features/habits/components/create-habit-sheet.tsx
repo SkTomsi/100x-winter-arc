@@ -51,8 +51,8 @@ export default function CreateHabitSheet() {
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
-        <Button className="rounded-full h-full w-1/2 py-4">
-          <PlusIcon className="w-4 h-4 mr-2" />
+        <Button className="rounded-full h-fit w-1/2 py-4">
+          <PlusIcon className="w-5 h-5 mr-2" />
           New Habit
         </Button>
       </DrawerTrigger>
@@ -91,9 +91,41 @@ export default function CreateHabitSheet() {
                 </FormItem>
               )}
             />
-            <Button className="w-full rounded-full h-full py-4">
-              Create Habit
-            </Button>
+            {/* <div className="flex w-full justify-between">
+              <FormField
+                name="description"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        className="min-w-full"
+                        placeholder="Enter your description"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                name="description"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        className="min-w-full"
+                        placeholder="Enter your description"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div> */}
+            <Button className="w-full rounded-full py-6">Create Habit</Button>
           </form>
         </Form>
       </DrawerContent>

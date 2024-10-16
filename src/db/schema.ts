@@ -19,11 +19,13 @@ export const habits = pgTable("habits", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   description: text("description"),
-  createdAt: timestamp("createdAt").defaultNow(),
-  streak: integer("streak").default(0),
-  lastCompleted: timestamp("lastCompleted"),
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
+  streak: integer("streak").default(0).notNull(),
+  lastCompleted: timestamp("lastCompleted", { mode: "date" }),
   userId: text("userId").notNull(),
 });
+
+export type Habit = typeof habits.$inferSelect;
 
 export const streaks = pgTable("streaks", {
   id: text("id").primaryKey(),
