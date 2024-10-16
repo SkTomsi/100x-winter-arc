@@ -1,6 +1,6 @@
 "use client";
-import BottomNavBar from "@/features/home-screen/components/bottom-nav-bar";
-import TopBar from "@/features/home-screen/components/top-bar";
+import BottomNavBar from "@/features/habits/components/bottom-nav-bar";
+import TopBar from "@/features/habits/components/top-bar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

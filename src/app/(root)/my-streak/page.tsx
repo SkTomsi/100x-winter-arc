@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import {
   Label,
   PolarGrid,
@@ -9,11 +8,12 @@ import {
   RadialBarChart,
 } from "recharts";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-import { Habit } from "@/lib/types";
 import { Card } from "@/components/ui/card";
+import { useHabits } from "@/features/habits/api/useHabits";
 
 export default function MyStreak() {
-  const [habits, setHabits] = useState<Habit[]>([]);
+  const { data, isLoading } = useHabits();
+
   const chartData = [
     {
       browser: "safari",
@@ -30,13 +30,6 @@ export default function MyStreak() {
       color: "hsl(var(--primary-foreground))",
     },
   } satisfies ChartConfig;
-
-  useEffect(() => {
-    const habits = localStorage.getItem("habits");
-    if (habits) {
-      setHabits(JSON.parse(habits));
-    }
-  }, []);
 
   return (
     <div className="w-full h-auto flex flex-col mt-8 items-center justify-start px-4">
@@ -95,18 +88,21 @@ export default function MyStreak() {
           </RadialBarChart>
         </ChartContainer>
       </div>
-      <div className="w-full h-full flex flex-col gap-y-5 my-4">
-        {habits.map((habit, index) => (
-          <Card
-            key={index}
-            className="w-full rounded-2xl border-card-foreground/10 shadow-none px-4 py-2 min-h-[88px]"
-          >
-            <div></div>
-            <p className="text-lg font-bold">{habit.task}</p>
-            <p>{habit.goal}</p>
-            <p>{habit.dailyGoal}</p>
-          </Card>
-        ))}
+      <div className="w-full h-full flex flex-col gap-y-5 my-4 mb-24">
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          data?.map((habit, index) => (
+            <Card
+              key={index}
+              className="w-full rounded-2xl border-card-foreground/10 shadow-none px-4 py-2 min-h-[88px]"
+            >
+              <div></div>
+              <p className="text-lg font-bold">{habit.name}</p>
+              <p>{habit.streak}</p>
+            </Card>
+          ))
+        )}
       </div>
     </div>
   );

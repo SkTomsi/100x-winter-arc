@@ -17,7 +17,7 @@ export default function Home() {
         Pov: you are about to start the greatest character development arc of
         your life.(this time its serious)
       </div>
-      <Link href="/sign-in" className="w-fit">
+      <Link href="/my-streak" className="w-fit">
         <Button
           className="rounded-full bg-white font-bold bg-primary w-fit text-md"
           size={"lg"}

@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { QueryProvider } from "@/components/providers/query-provider";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "../assets/fonts/GeistVF.woff",
@@ -38,9 +40,12 @@ export default function RootLayout({
       >
         <QueryProvider>
           <ThemeProvider attribute="class" defaultTheme="dark">
-            <div className="max-w-[576px] mx-auto min-h-screen w-full">
-              <main className="w-full h-full">{children}</main>
-            </div>
+            <ClerkProvider>
+              <div className="max-w-[576px] mx-auto min-h-screen w-full">
+                <main className="w-full h-full">{children}</main>
+              </div>
+              <Toaster richColors />
+            </ClerkProvider>
           </ThemeProvider>
         </QueryProvider>
       </body>
