@@ -8,7 +8,7 @@ import Image from "next/image";
 export const HabitCard = ({ habit }: { habit: Habit }) => {
   const isDisabled =
     new Date(habit.lastCompleted!).toLocaleDateString() ===
-      new Date().toLocaleDateString() ?? true;
+    new Date().toLocaleDateString();
 
   console.log(isDisabled, "DATE MATCHES");
 
