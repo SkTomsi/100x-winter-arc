@@ -8,7 +8,9 @@ import Image from "next/image";
 export const HabitCard = ({ habit }: { habit: Habit }) => {
   const isDisabled =
     new Date(habit.lastCompleted!).toLocaleDateString() ===
-    new Date().toLocaleDateString();
+      new Date().toLocaleDateString() ?? true;
+
+  console.log(isDisabled, "DATE MATCHES");
 
   return (
     <Card className="w-full rounded-2xl border-card-foreground/5 shadow-none p-3 h-fit  tracking-tighter flex justify-between items-center">
@@ -30,8 +32,8 @@ export const HabitCard = ({ habit }: { habit: Habit }) => {
             <p className="font-bold text-sm text-orange-500">{habit.streak}</p>
           </div>
           {habit.streak === 0 && (
-            <p className="text-sm text-[hsl(321,100%,50%)] px-2 py-1 bg-[hsl(321,100%,50%)]/20 rounded-sm">
-              new
+            <p className="text-sm font-medium text-[hsl(321,100%,50%)] px-2 py-1 bg-[hsl(321,100%,50%)]/20 rounded-sm">
+              New
             </p>
           )}
         </div>
