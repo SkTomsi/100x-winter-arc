@@ -10,8 +10,6 @@ export const HabitCard = ({ habit }: { habit: Habit }) => {
     new Date(habit.lastCompleted!).toLocaleDateString() ===
     new Date().toLocaleDateString();
 
-  console.log(isDisabled, "DATE MATCHES");
-
   return (
     <Card className="w-full rounded-2xl border-card-foreground/5 shadow-none p-3 h-fit  tracking-tighter flex justify-between items-center">
       <div className="flex flex-col gap-2 items-center rounded-lg p-3 border border-card-foreground/5">

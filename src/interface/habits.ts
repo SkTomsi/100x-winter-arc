@@ -7,3 +7,14 @@ export interface Habit {
   userId: string;
   description: string | null;
 }
+
+export interface CheckIn {
+  id: string;
+  checkInDate: string;
+  habitId: string;
+  userId: string;
+}
+
+export interface HabitWithCheckIns extends Habit {
+  checkIns: CheckIn[];
+}

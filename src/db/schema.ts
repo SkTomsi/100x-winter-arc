@@ -1,10 +1,5 @@
-import {
-  boolean,
-  integer,
-  pgTable,
-  text,
-  timestamp,
-} from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
+import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 // export const user = pgTable("user", {
 //   id: text("id").primaryKey(),
@@ -25,16 +20,23 @@ export const habits = pgTable("habits", {
   userId: text("userId").notNull(),
 });
 
-export const streaks = pgTable("streaks", {
-  id: text("id").primaryKey(),
-  habitId: text("habitId").notNull(),
-  completed: boolean("completed").notNull(),
-  checkInDate: timestamp("checkInDate").defaultNow(),
-});
+export const habitsRelations = relations(habits, ({ many }) => ({
+  checkIns: many(checkIns),
+}));
+
+export type HabitSelect = typeof habits.$inferSelect;
+export type HabitInsert = typeof habits.$inferInsert;
 
 export const checkIns = pgTable("checkIns", {
   id: text("id").primaryKey(),
-  habitId: text("habitId").notNull(),
+  habitId: text("habitId")
+    .notNull()
+    .references(() => habits.id, {
+      onDelete: "cascade",
+    }),
   userId: text("userId").notNull(),
   checkInDate: timestamp("checkInDate").defaultNow(),
 });
+
+export type CheckInSelect = typeof checkIns.$inferSelect;
+export type CheckInInsert = typeof checkIns.$inferInsert;

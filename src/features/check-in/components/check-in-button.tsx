@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Check, Loader2 } from "lucide-react";
+import { Check, Loader } from "lucide-react";
 import { useCheckIn } from "../api/use-check-in";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -38,7 +38,7 @@ export const CheckInButton = ({
       onClick={handleCheckIn}
       disabled={isPending || disabled}
     >
-      {isPending ? <Loader2 className="animate-spin " /> : <Check />}
+      {isPending ? <Loader className="animate-spin " /> : <Check />}
     </Button>
   );
 };
