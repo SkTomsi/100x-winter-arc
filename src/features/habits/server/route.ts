@@ -2,9 +2,12 @@ import { db } from "@/db";
 import { Hono } from "hono";
 import { HabitSchema } from "./schema";
 import { zValidator } from "@hono/zod-validator";
-import { habits } from "@/db/schema";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { nanoid } from "nanoid";
+import { desc, eq } from "drizzle-orm";
+import { habits } from "@/db/schema";
+import { HTTPException } from "hono/http-exception";
+
 export const HabitsRouter = new Hono()
   .post(
     "/create",
@@ -15,10 +18,10 @@ export const HabitsRouter = new Hono()
 
       const user = getAuth(c);
 
-      console.log(user);
-
       if (!user) {
-        return c.json({ success: false, error: "Unauthorized" });
+        throw new HTTPException(401, {
+          res: c.json({ success: false, error: "Unauthorized" }),
+        });
       }
 
       try {
@@ -34,12 +37,36 @@ export const HabitsRouter = new Hono()
         return c.json({ success: true, message: "Habit created successfully" });
       } catch (error) {
         console.log(error);
-        return c.json({ success: false, error: "Failed to create habit" });
+        throw new HTTPException(401, {
+          res: c.json({ success: false, error: "Failed to create habit" }),
+        });
       }
     }
   )
-  .get("/", async (c) => {
-    const habits = await db.query.habits.findMany();
+  .get("/", clerkMiddleware(), async (c) => {
+    const user = getAuth(c);
 
-    return c.json({ success: true, data: habits });
+    if (!user) {
+      throw new HTTPException(401, {
+        res: c.json({ success: false, error: "Unauthorized" }),
+      });
+    }
+
+    try {
+      const userHabits = await db.query.habits.findMany({
+        where: eq(habits.userId, user.userId!),
+        orderBy: desc(habits.createdAt),
+      });
+
+      if (userHabits.length === 0) {
+        return c.json({ success: true, data: [] });
+      }
+
+      return c.json({ success: true, data: userHabits });
+    } catch (error) {
+      console.log(error);
+      throw new HTTPException(500, {
+        res: c.json({ success: false, error: "Failed to fetch habits" }),
+      });
+    }
   });

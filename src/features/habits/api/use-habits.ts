@@ -7,7 +7,7 @@ export const useHabits = () => {
     queryFn: async () => {
       const response = await client.api.habits["$get"]();
 
-      const { data, success } = await response.json();
+      const { success, data } = await response.json();
 
       if (!success) {
         throw new Error("Failed to fetch habits");

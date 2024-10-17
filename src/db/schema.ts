@@ -21,15 +21,20 @@ export const habits = pgTable("habits", {
   description: text("description"),
   createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
   streak: integer("streak").default(0).notNull(),
-  lastCompleted: timestamp("lastCompleted", { mode: "date" }),
+  lastCompleted: timestamp("lastCompleted"),
   userId: text("userId").notNull(),
 });
-
-export type Habit = typeof habits.$inferSelect;
 
 export const streaks = pgTable("streaks", {
   id: text("id").primaryKey(),
   habitId: text("habitId").notNull(),
   completed: boolean("completed").notNull(),
+  checkInDate: timestamp("checkInDate").defaultNow(),
+});
+
+export const checkIns = pgTable("checkIns", {
+  id: text("id").primaryKey(),
+  habitId: text("habitId").notNull(),
+  userId: text("userId").notNull(),
   checkInDate: timestamp("checkInDate").defaultNow(),
 });

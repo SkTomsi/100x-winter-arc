@@ -1,5 +1,5 @@
 "use client";
-import { useHabits } from "@/features/habits/api/useHabits";
+import { useHabits } from "@/features/habits/api/use-habits";
 import { HabitCard } from "./habit-card";
 
 export const HabitList = () => {

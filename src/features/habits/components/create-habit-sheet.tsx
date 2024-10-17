@@ -21,7 +21,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { HabitSchema } from "../server/schema";
-import { useCreateHabit } from "../api/useCreateHabit";
+import { useCreateHabit } from "../api/use-create-habit";
 import { useState } from "react";
 
 export default function CreateHabitSheet() {
